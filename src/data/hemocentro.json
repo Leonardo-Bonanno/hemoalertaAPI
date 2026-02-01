@@ -1,0 +1,12 @@
+[   
+    {
+        "id": 0,
+        "name": "Hospital São Paulo",
+        "coordenates": 1
+    },
+    {
+        "id": 1,
+        "name": "Clínica Cruzeiro do Sul",
+        "coordenates": 2
+    }
+]
