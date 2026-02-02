@@ -5,29 +5,27 @@ const path = require('path');
 const router = express.Router();
 
 const alertsService = require('../services/alerts.service');
+const localsService = require('../services/locals.service');
 
 const filePath = path.join(__dirname, '..', 'data', 'alerts.json'); // Puxa as informações do JSON, essa parte vai ficar dentro do get no futuro, está aqui para evitar código duplicado
 
 // GET LOCALS
-router.get('/locals', (req, res) => {
-  const localsPath = path.join(__dirname, '..', 'data', 'hemocentro.json');
-  
-  fs.readFile(localsPath, 'utf8', (err, data) => {
-
-    if (err) {
-      return res.status(500).json({ message: 'Erro ao ler locais' });
-    }
-
-    const locals = JSON.parse(data);
+router.get('/locals', async (req, res) => {
+  try {
+    const locals = await localsService.getAllLocals();
     res.status(200).json(locals);
-  });
+
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro ao ler locais' });
+  }
+  
 });
 
 // GET ALERTS
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
 
-    const alerts = alertsService.getFormattedAlerts();
+    const alerts = await alertsService.getFormattedAlerts();
     res.status(200).json(alerts);
 
   } catch (error) {
@@ -38,50 +36,20 @@ router.get('/', (req, res) => {
 });
 
 // POST ALERTA
-router.post('/', (req, res) => {
-  const { hemocentro, sanguineo } = req.body;
+router.post('/', async (req, res) => {
+  try {
+    const newAlert = await createAlert(req.body);
 
-  // Validação
-  if (!hemocentro || !sanguineo) {
-    return res.status(400).json({
-      message: 'Hemocentro e tipo sanguíneo são obrigatórios'
+    res.status(201).json({
+      message: 'Alerta criado com sucesso',
+      data: newAlert
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: error.message
     });
   }
-
-  // Ler o JSON
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      return res.status(500).json({ message: 'Erro ao ler alertas' });
-    }
-
-    const alerts = JSON.parse(data);
-
-    // Criar alerta
-    const newAlert = {
-      id: alerts.length + 1,
-      data: new Date().toISOString(),
-      hemocentro,
-      sanguineo
-    };
-
-    // Adicionar ao array
-    alerts.push(newAlert);
-
-    // Salvar no arquivo
-    fs.writeFile(filePath, JSON.stringify(alerts, null, 2), (err) => {
-      if (err) {
-        return res.status(500).json({ message: 'Erro ao salvar alerta' });
-      }
-
-      console.log('📨 Novo alerta criado:', newAlert);
-
-      // Resposta
-      res.status(201).json({
-        message: 'Alerta criado com sucesso',
-        data: newAlert
-      });
-    });
-  });
 });
+
 
 module.exports = router;
