@@ -7,8 +7,6 @@ const router = express.Router();
 const alertsService = require('../services/alerts.service');
 const localsService = require('../services/locals.service');
 
-const filePath = path.join(__dirname, '..', 'data', 'alerts.json'); // Puxa as informações do JSON, essa parte vai ficar dentro do get no futuro, está aqui para evitar código duplicado
-
 // GET LOCALS
 router.get('/locals', async (req, res) => {
   try {

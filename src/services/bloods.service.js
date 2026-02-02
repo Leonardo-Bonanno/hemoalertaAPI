@@ -14,6 +14,6 @@ async function getBloodById(id) {
 }
 
 module.exports = {
-  getAllbloods,
+  getAllBloods,
   getBloodById
 };
