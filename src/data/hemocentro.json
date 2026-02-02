@@ -1,12 +1,22 @@
-[   
-    {
-        "id": 0,
-        "name": "Hospital São Paulo",
-        "coordenates": 1
-    },
-    {
-        "id": 1,
-        "name": "Clínica Cruzeiro do Sul",
-        "coordenates": 2
-    }
+[
+  {
+    "id": 0,
+    "name": "Hospital São Paulo",
+    "coordenates": 1
+  },
+  {
+    "id": 1,
+    "name": "Clínica Cruzeiro do Sul",
+    "coordenates": 2
+  },
+  {
+    "id": 3,
+    "name": "UPA Analia Franco",
+    "coordenates": 3
+  },
+  {
+    "id": 4,
+    "name": "Hospital Albert Eistein",
+    "coordenates": 4
+  }
 ]

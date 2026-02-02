@@ -4,7 +4,8 @@ const path = require('path');
 
 const router = express.Router();
 
-const alerts = require('../data/alerts.mock');
+const alertsService = require('../services/alerts.service');
+
 const filePath = path.join(__dirname, '..', 'data', 'alerts.json'); // Puxa as informações do JSON, essa parte vai ficar dentro do get no futuro, está aqui para evitar código duplicado
 
 // GET LOCALS
@@ -24,28 +25,30 @@ router.get('/locals', (req, res) => {
 
 // GET ALERTS
 router.get('/', (req, res) => {
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      return res.status(500).json({ message: 'Erro ao ler alertas' });
-    }
+  try {
 
-    const alerts = JSON.parse(data);
+    const alerts = alertsService.getFormattedAlerts();
     res.status(200).json(alerts);
-  });
+
+  } catch (error) {
+
+    res.status(500).json({ message: 'Erro ao buscar alertas' });
+    
+  }
 });
 
 // POST ALERTA
 router.post('/', (req, res) => {
   const { hemocentro, sanguineo } = req.body;
 
-  // 1️⃣ Validação
+  // Validação
   if (!hemocentro || !sanguineo) {
     return res.status(400).json({
       message: 'Hemocentro e tipo sanguíneo são obrigatórios'
     });
   }
 
-  // 2️⃣ Ler o JSON
+  // Ler o JSON
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       return res.status(500).json({ message: 'Erro ao ler alertas' });
@@ -53,7 +56,7 @@ router.post('/', (req, res) => {
 
     const alerts = JSON.parse(data);
 
-    // 3️⃣ Criar alerta
+    // Criar alerta
     const newAlert = {
       id: alerts.length + 1,
       data: new Date().toISOString(),
@@ -61,10 +64,10 @@ router.post('/', (req, res) => {
       sanguineo
     };
 
-    // 4️⃣ Adicionar ao array
+    // Adicionar ao array
     alerts.push(newAlert);
 
-    // 5️⃣ Salvar no arquivo
+    // Salvar no arquivo
     fs.writeFile(filePath, JSON.stringify(alerts, null, 2), (err) => {
       if (err) {
         return res.status(500).json({ message: 'Erro ao salvar alerta' });
@@ -72,7 +75,7 @@ router.post('/', (req, res) => {
 
       console.log('📨 Novo alerta criado:', newAlert);
 
-      // 6️⃣ Resposta
+      // Resposta
       res.status(201).json({
         message: 'Alerta criado com sucesso',
         data: newAlert
