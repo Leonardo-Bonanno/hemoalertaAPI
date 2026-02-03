@@ -8,7 +8,7 @@ const alertsPath = path.join(__dirname, "..", "data", "alerts.json");
 
 // Função para puxar todos os alertas, serve para todo tipo de manipulação
 async function getAlerts() {
-  const alerts =await fs.readFile(alertsPath, "utf8");
+  const alerts = await fs.readFile(alertsPath, "utf8");
   return JSON.parse(alerts);
 }
 
@@ -34,7 +34,7 @@ async function getFormattedAlerts() {
 async function createAlert({ hemocentro, sanguineo }) {
   // Validação
   if (!hemocentro || !sanguineo) {
-    throw new Error("Hemocentro e tipo sanguíneo são obrigatórios");;
+    throw new Error("Hemocentro e/ou tipo sanguíneo não definidos");;
   }
 
   const alerts = await getAlerts();

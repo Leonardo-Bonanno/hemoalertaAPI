@@ -6,6 +6,7 @@ const router = express.Router();
 
 const alertsService = require('../services/alerts.service');
 const localsService = require('../services/locals.service');
+const { type } = require('os');
 
 // GET LOCALS
 router.get('/locals', async (req, res) => {
@@ -40,11 +41,13 @@ router.post('/', async (req, res) => {
 
     res.status(201).json({
       message: 'Alerta criado com sucesso',
-      data: newAlert
+      data: newAlert,
+      type: "success"
     });
   } catch (error) {
     res.status(400).json({
-      message: error.message
+      message: error.message,
+      type: "danger"
     });
   }
 });
