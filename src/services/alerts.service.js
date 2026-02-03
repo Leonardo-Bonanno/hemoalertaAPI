@@ -1,20 +1,11 @@
-const fs = require("fs/promises");
-const path = require("path");
+const alertsRepository = require("../repositories/alerts.repository");
 
 const localsService = require("./locals.service");
 const bloodsService = require("./bloods.service");
 
-const alertsPath = path.join(__dirname, "..", "data", "alerts.json");
-
-// Função para puxar todos os alertas, serve para todo tipo de manipulação
-async function getAlerts() {
-  const alerts = await fs.readFile(alertsPath, "utf8");
-  return JSON.parse(alerts);
-}
-
 // Função para mapear os alertas, monta objeto para passar para o front
-async function getFormattedAlerts() {
-  const alerts = await getAlerts();
+async function formatAlerts() {
+  const alerts = await alertsRepository.getAlerts();
 
   return Promise.all(
     alerts.map(async (alert) => {
@@ -32,29 +23,22 @@ async function getFormattedAlerts() {
 }
 
 async function createAlert({ hemocentro, sanguineo }) {
-  // Validação
+
   if (!hemocentro || !sanguineo) {
     throw new Error("Hemocentro e/ou tipo sanguíneo não definidos");;
   }
 
-  const alerts = await getAlerts();
-
   const newAlert = {
-    id: alerts.length + 1,
     data: new Date().toISOString(),
     hemocentro: Number(hemocentro),
     sanguineo: Number(sanguineo),
   };
 
-  alerts.push(newAlert);
+  return alertsRepository.create(newAlert);
 
-  await fs.writeFile(alertsPath, JSON.stringify(alerts, null, 2));
-
-  return newAlert;
 }
 
 module.exports = {
-  getAlerts,
-  getFormattedAlerts,
+  formatAlerts,
   createAlert
 };

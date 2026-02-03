@@ -1,19 +1,14 @@
-const fs = require('fs/promises');
-const path = require('path');
-
-const bloodsPath = path.join(__dirname, '..', 'data', 'blood.json');
+const bloodsRepository = require("../repositories/bloods.repository");
 
 async function getAllBloods() {
-    const data = await fs.readFile(bloodsPath, 'utf8')
-    return JSON.parse(data);
+  return await bloodsRepository.getBloods();
 }
 
 async function getBloodById(id) {
-  const bloods = await getAllBloods();
-  return bloods.find(blood => blood.id === Number(id));
+  return await bloodsRepository.getBloodById(id);
 }
 
 module.exports = {
   getAllBloods,
-  getBloodById
+  getBloodById,
 };

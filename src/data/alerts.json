@@ -130,5 +130,23 @@
     "data": "2026-02-03T19:17:54.000Z",
     "hemocentro": 0,
     "sanguineo": 1
+  },
+  {
+    "id": 23,
+    "data": "2026-02-03T20:06:15.579Z",
+    "hemocentro": 5,
+    "sanguineo": 6
+  },
+  {
+    "id": 24,
+    "data": "2026-02-03T22:16:50.685Z",
+    "hemocentro": 0,
+    "sanguineo": 4
+  },
+  {
+    "id": 25,
+    "data": "2026-02-03T22:32:37.799Z",
+    "hemocentro": 6,
+    "sanguineo": 7
   }
 ]

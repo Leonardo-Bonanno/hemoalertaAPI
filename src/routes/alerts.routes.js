@@ -1,12 +1,9 @@
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 
 const router = express.Router();
 
 const alertsService = require('../services/alerts.service');
 const localsService = require('../services/locals.service');
-const { type } = require('os');
 
 // GET LOCALS
 router.get('/locals', async (req, res) => {
@@ -24,7 +21,7 @@ router.get('/locals', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
 
-    const alerts = await alertsService.getFormattedAlerts();
+    const alerts = await alertsService.formatAlerts();
     res.status(200).json(alerts);
 
   } catch (error) {
@@ -51,6 +48,5 @@ router.post('/', async (req, res) => {
     });
   }
 });
-
 
 module.exports = router;

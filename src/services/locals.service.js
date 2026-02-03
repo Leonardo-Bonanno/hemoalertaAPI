@@ -1,19 +1,14 @@
-const fs = require('fs/promises');
-const path = require('path');
-
-const localsPath = path.join(__dirname, '..', 'data', 'hemocentro.json');
+const localsRepository = require("../repositories/locals.repository");
 
 async function getAllLocals() {
-    const data = await fs.readFile(localsPath, 'utf8')
-    return JSON.parse(data);
+  return await localsRepository.getLocals();
 }
 
 async function getLocalById(id) {
-  const locals = await getAllLocals();
-  return locals.find(local => local.id === Number(id));
+  return await localsRepository.getLocalById(id);
 }
 
 module.exports = {
   getAllLocals,
-  getLocalById
+  getLocalById,
 };

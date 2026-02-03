@@ -28,5 +28,11 @@
     "name": "UPA Vila Clara",
     "lat": 5,
     "long": 5
+  },
+  {
+    "id": 6,
+    "name": "Hemocentro ACAL",
+    "lat": 6,
+    "long": 6
   }
 ]
