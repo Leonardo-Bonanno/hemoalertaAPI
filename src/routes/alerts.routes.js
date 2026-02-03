@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
 // POST ALERTA
 router.post('/', async (req, res) => {
   try {
-    const newAlert = await createAlert(req.body);
+    const newAlert = await alertsService.createAlert(req.body);
 
     res.status(201).json({
       message: 'Alerta criado com sucesso',

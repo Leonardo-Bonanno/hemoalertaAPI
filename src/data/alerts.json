@@ -106,5 +106,17 @@
     "data": "2026-02-02T02:03:56.950Z",
     "hemocentro": "3",
     "sanguineo": "4"
+  },
+  {
+    "id": 19,
+    "data": "2026-02-03T00:27:46.186Z",
+    "hemocentro": 3,
+    "sanguineo": 2
+  },
+  {
+    "id": 20,
+    "data": "2026-02-03T00:28:18.241Z",
+    "hemocentro": 3,
+    "sanguineo": 2
   }
 ]

@@ -42,8 +42,8 @@ async function createAlert({ hemocentro, sanguineo }) {
   const newAlert = {
     id: alerts.length + 1,
     data: new Date().toISOString(),
-    hemocentro,
-    sanguineo,
+    hemocentro: Number(hemocentro),
+    sanguineo: Number(sanguineo),
   };
 
   alerts.push(newAlert);
