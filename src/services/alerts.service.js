@@ -6,21 +6,24 @@ const bloodsService = require("./bloods.service");
 // Função para mapear os alertas, monta objeto para passar para o front
 async function formatAlerts() {
   const alerts = await alertsRepository.getAlerts();
+  const locals = await localsService.getAllLocals();
+  const bloods = await bloodsService.getAllBloods();
 
-  return Promise.all(
-    alerts.map(async (alert) => {
-      const local = await localsService.getLocalById(alert.hemocentro);
-      const blood = await bloodsService.getBloodById(alert.sanguineo);
-
-      return {
-        id: alert.id,
-        data: alert.data,
-        hemocentro: local ? local.name : "Desconhecido",
-        sanguineo: blood ? blood.name : "Não identificado",
-      };
-    })
+  const localsMap = new Map(
+    locals.map(local => [local.id, local.name])
   );
+  const bloodsMap = new Map(
+    bloods.map(blood => [blood.id, blood.name])
+  );
+
+  return alerts.map(alert => ({
+    id: alert.id,
+    data: alert.data,
+    hemocentro: localsMap.get(alert.hemocentro) || "Desconhecido",
+    sanguineo: bloodsMap.get(alert.sanguineo) || "Não identificado",
+  }));
 }
+
 
 async function createAlert({ hemocentro, sanguineo }) {
 

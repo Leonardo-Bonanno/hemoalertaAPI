@@ -2,110 +2,110 @@
   {
     "id": 2,
     "data": "2026-02-01T22:50:31.871Z",
-    "hemocentro": "1",
-    "sanguineo": "7"
+    "hemocentro": 1,
+    "sanguineo": 7
   },
   {
     "id": 3,
     "data": "2026-02-01T22:59:50.384Z",
-    "hemocentro": "1",
-    "sanguineo": "0"
+    "hemocentro": 1,
+    "sanguineo": 0
   },
   {
     "id": 4,
     "data": "2026-02-01T23:19:01.090Z",
-    "hemocentro": "0",
-    "sanguineo": "2"
+    "hemocentro": 0,
+    "sanguineo": 2
   },
   {
     "id": 5,
     "data": "2026-02-01T23:19:49.430Z",
-    "hemocentro": "0",
-    "sanguineo": "6"
+    "hemocentro": 0,
+    "sanguineo": 6
   },
   {
     "id": 6,
     "data": "2026-02-01T23:22:26.604Z",
-    "hemocentro": "1",
-    "sanguineo": "2"
+    "hemocentro": 1,
+    "sanguineo": 2
   },
   {
     "id": 7,
     "data": "2026-02-01T23:25:31.388Z",
-    "hemocentro": "3",
-    "sanguineo": "2"
+    "hemocentro": 3,
+    "sanguineo": 2
   },
   {
     "id": 8,
     "data": "2026-02-01T23:30:02.582Z",
-    "hemocentro": "4",
-    "sanguineo": "5"
+    "hemocentro": 4,
+    "sanguineo": 5
   },
   {
     "id": 9,
     "data": "2026-02-01T23:34:07.155Z",
-    "hemocentro": "4",
-    "sanguineo": "7"
+    "hemocentro": 4,
+    "sanguineo": 7
   },
   {
     "id": 10,
     "data": "2026-02-01T23:34:14.643Z",
-    "hemocentro": "1",
-    "sanguineo": "2"
+    "hemocentro": 1,
+    "sanguineo": 2
   },
   {
     "id": 11,
     "data": "2026-02-01T23:34:15.603Z",
-    "hemocentro": "1",
-    "sanguineo": "2"
+    "hemocentro": 1,
+    "sanguineo": 2
   },
   {
     "id": 12,
     "data": "2026-02-01T23:34:16.641Z",
-    "hemocentro": "1",
-    "sanguineo": "2"
+    "hemocentro": 1,
+    "sanguineo": 2
   },
   {
     "id": 13,
     "data": "2026-02-01T23:34:17.968Z",
-    "hemocentro": "1",
-    "sanguineo": "2"
+    "hemocentro": 1,
+    "sanguineo": 2
   },
   {
     "id": 14,
     "data": "2026-02-01T23:34:18.118Z",
-    "hemocentro": "1",
-    "sanguineo": "2"
+    "hemocentro": 1,
+    "sanguineo": 2
   },
   {
     "id": 15,
     "data": "2026-02-01T23:34:35.754Z",
-    "hemocentro": "0",
-    "sanguineo": "1"
+    "hemocentro": 0,
+    "sanguineo": 1
   },
   {
     "id": 16,
     "data": "2026-02-01T23:34:45.547Z",
-    "hemocentro": "3",
-    "sanguineo": "4"
+    "hemocentro": 3,
+    "sanguineo": 4
   },
   {
     "id": 17,
     "data": "2026-02-01T23:35:17.321Z",
-    "hemocentro": "4",
-    "sanguineo": "2"
+    "hemocentro": 4,
+    "sanguineo": 2
   },
   {
     "id": 18,
     "data": "2026-02-02T01:58:06.694Z",
-    "hemocentro": "4",
-    "sanguineo": "2"
+    "hemocentro": 4,
+    "sanguineo": 2
   },
   {
     "id": 19,
     "data": "2026-02-02T02:03:56.950Z",
-    "hemocentro": "3",
-    "sanguineo": "4"
+    "hemocentro": 3,
+    "sanguineo": 4
   },
   {
     "id": 19,
