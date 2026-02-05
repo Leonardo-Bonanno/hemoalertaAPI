@@ -8,7 +8,16 @@ async function getBloodById(id) {
   return await bloodsRepository.getBloodById(id);
 }
 
+async function mapBloods() {
+  const bloods = await getAllBloods();
+
+  return new Map(
+    bloods.map(blood => [blood.id, blood.name])
+  );
+}
+
 module.exports = {
   getAllBloods,
   getBloodById,
+  mapBloods
 };
