@@ -4,6 +4,7 @@ const router = express.Router();
 
 const alertsService = require('../services/alerts.service');
 const localsService = require('../services/locals.service');
+const bloodsService = require('../services/bloods.service');
 
 // GET LOCALS
 router.get('/locals', async (req, res) => {
@@ -13,6 +14,18 @@ router.get('/locals', async (req, res) => {
 
   } catch (error) {
     return res.status(500).json({ message: 'Erro ao ler locais' });
+  }
+  
+});
+
+// GET BLOOD
+router.get('/bloods', async (req, res) => {
+  try {
+    const bloods = await bloodsService.getAllBloods();
+    res.status(200).json(bloods);
+
+  } catch (error) {
+    return res.status(500).json({ message: 'Erro ao ler tipos sanguineos' });
   }
   
 });
