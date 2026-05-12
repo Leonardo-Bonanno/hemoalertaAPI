@@ -1,19 +1,12 @@
-const fs = require("fs/promises");
-const path = require("path");
+import prisma from "../config/prisma.js";
 
-const bloodPath = path.join(__dirname, "..", "data", "blood.json");
+export async function getBloods() { 
+  return prisma.bloodType.findMany({ }); }
 
-async function getBloods() {
-  const data = await fs.readFile(bloodPath, "utf8");
-  return JSON.parse(data);
+export async function getBloodById(id) {
+  return prisma.bloodType.findUnique({
+    where: {
+      id: Number(id)
+    }
+  });
 }
-
-async function getBloodById(id) {
-  const bloods = await getBloods();
-  return bloods.find(b => b.id === Number(id));
-}
-
-module.exports = {
-  getBloods,
-  getBloodById
-};

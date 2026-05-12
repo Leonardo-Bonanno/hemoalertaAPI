@@ -1,19 +1,12 @@
-const fs = require("fs/promises");
-const path = require("path");
+import prisma from "../config/prisma.js";
 
-const localsPath = path.join(__dirname, "..", "data", "hemocentro.json");
+export async function getLocals() { 
+  return prisma.hemocentro.findMany({ }); }
 
-async function getLocals() {
-  const data = await fs.readFile(localsPath, "utf8");
-  return JSON.parse(data);
+export async function getLocalById(id) {
+  return prisma.hemocentro.findUnique({
+    where: {
+      id: Number(id)
+    }
+  });
 }
-
-async function getLocalById(id) {
-  const locals = await getLocals();
-  return locals.find(l => l.id === Number(id));
-}
-
-module.exports = {
-  getLocals,
-  getLocalById
-};
