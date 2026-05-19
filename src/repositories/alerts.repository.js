@@ -1,38 +1,40 @@
-const fs = require("fs/promises");
-const path = require("path");
+import prisma from "../config/prisma.js";
 
-const alertsPath = path.join(__dirname, "..", "data", "alerts.json");
-
-// Lê o arquivo inteiro
+// Busca todos os alertas
 async function getAlerts() {
-  const data = await fs.readFile(alertsPath, "utf8");
-  return JSON.parse(data);
-}
+  return await prisma.alert.findMany({
+    include: {
+      bloodType: true,
+      hemocentro: true,
+    },
 
-// Salva o array inteiro
-async function saveAlerts(alerts) {
-  await fs.writeFile(alertsPath, JSON.stringify(alerts, null, 2));
+    orderBy: {
+      created_at: "desc",
+    },
+  });
 }
 
 // Cria um novo alerta
 async function create(alert) {
-  const alerts = await getAlerts();
+  const newAlert = await prisma.alert.create({
+    data: {
+      blood_type_id: Number(alert.sanguineo),
+      hemocentro_id: Number(alert.hemocentro),
 
-  // No futuro o id tem que se basear no último id
-  const newAlert = {
-    id: alerts.length + 1,
-    data: alert.data,
-    hemocentro: Number(alert.hemocentro),
-    sanguineo: Number(alert.sanguineo),
-  };
+      // opcional
+      status: alert.status || "ativo",
+    },
 
-  alerts.push(newAlert);
-  await saveAlerts(alerts);
+    include: {
+      bloodType: true,
+      hemocentro: true,
+    },
+  });
 
   return newAlert;
 }
 
-module.exports = {
+export default {
   getAlerts,
-  create
+  create,
 };

@@ -1,11 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -13,32 +7,29 @@ datasource db {
 }
 
 model Hemocentro {
-  id                      Int      @id @default(autoincrement())
-  nome                    String
-  cidade                  String
-  estado                  String
-  endereco                String
-  horario_funcionamento   String
-  latitude                Decimal @db.Decimal(9, 6)
-  longitude               Decimal @db.Decimal(9, 6)
-
-  alerts                  Alert[]
+  id                    Int     @id @default(autoincrement())
+  nome                  String
+  cidade                String
+  estado                String
+  endereco              String
+  horario_funcionamento String
+  latitude              Decimal @db.Decimal(9, 6)
+  longitude             Decimal @db.Decimal(9, 6)
+  alerts                Alert[]
 }
 
 model BloodType {
-  id          Int      @id @default(autoincrement())
-  blood_type  String
-
-  alerts      Alert[]
+  id         Int     @id @default(autoincrement())
+  blood_type String
+  alerts     Alert[]
 }
 
 model Alert {
-  id             Int          @id @default(autoincrement())
-  blood_type_id  Int
-  hemocentro_id  Int
-  created_at     DateTime     @default(now())
-  status         String?
-
-  bloodType      BloodType    @relation(fields: [blood_type_id], references: [id])
-  hemocentro     Hemocentro   @relation(fields: [hemocentro_id], references: [id])
+  id            Int        @id @default(autoincrement())
+  blood_type_id Int
+  hemocentro_id Int
+  created_at    DateTime   @default(now())
+  status        String?
+  bloodType     BloodType  @relation(fields: [blood_type_id], references: [id])
+  hemocentro    Hemocentro @relation(fields: [hemocentro_id], references: [id])
 }

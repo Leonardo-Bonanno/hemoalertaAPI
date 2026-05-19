@@ -1,4 +1,4 @@
-const bloodsRepository = require("../repositories/bloods.repository");
+import bloodsRepository from "../repositories/bloods.repository.js";
 
 async function getAllBloods() {
   return await bloodsRepository.getBloods();
@@ -12,11 +12,11 @@ async function mapBloods() {
   const bloods = await getAllBloods();
 
   return new Map(
-    bloods.map(blood => [blood.id, blood.name])
+    bloods.map(blood => [blood.id, blood.blood_type])
   );
 }
 
-module.exports = {
+export default {
   getAllBloods,
   getBloodById,
   mapBloods

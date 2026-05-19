@@ -1,4 +1,4 @@
-const localsRepository = require("../repositories/locals.repository");
+import localsRepository from "../repositories/locals.repository.js";
 
 async function getAllLocals() {
   return await localsRepository.getLocals();
@@ -12,11 +12,11 @@ async function maplocals() {
   const locals = await getAllLocals();
 
   return new Map(
-    locals.map(local => [local.id, local.name])
+    locals.map(local => [local.id, local.nome])
   );
 }
 
-module.exports = {
+export default {
   getAllLocals,
   getLocalById,
   maplocals

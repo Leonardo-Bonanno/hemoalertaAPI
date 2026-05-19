@@ -1,10 +1,10 @@
-const express = require('express');
+import { Router } from 'express';
 
-const router = express.Router();
+const router = Router();
 
-const alertsService = require('../services/alerts.service');
-const localsService = require('../services/locals.service');
-const bloodsService = require('../services/bloods.service');
+import alertsService from '../services/alerts.service.js';
+import localsService from '../services/locals.service.js';
+import bloodsService from '../services/bloods.service.js';
 
 // GET LOCALS
 router.get('/locals', async (req, res) => {
@@ -62,4 +62,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

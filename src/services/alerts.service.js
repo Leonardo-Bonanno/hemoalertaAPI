@@ -1,7 +1,6 @@
-const alertsRepository = require("../repositories/alerts.repository");
-
-const localsService = require("./locals.service");
-const bloodsService = require("./bloods.service");
+import alertsRepository from "../repositories/alerts.repository.js";
+import localsService from "./locals.service.js";
+import bloodsService from "./bloods.service.js";
 
 // Função para mapear os alertas, monta objeto para passar para o front
 async function formatAlerts() {
@@ -11,12 +10,11 @@ async function formatAlerts() {
 
   return alerts.map(alert => ({
     id: alert.id,
-    data: alert.data,
-    hemocentro: locals.get(alert.hemocentro) || "Desconhecido",
-    sanguineo: bloods.get(alert.sanguineo) || "Não identificado",
+    data: alert.created_at,
+    hemocentro: locals.get(alert.hemocentro.id) || "Desconhecido",
+    sanguineo: bloods.get(alert.bloodType.id) || "Não identificado",
   }));
 }
-
 
 async function createAlert({ hemocentro, sanguineo }) {
 
@@ -34,7 +32,7 @@ async function createAlert({ hemocentro, sanguineo }) {
 
 }
 
-module.exports = {
+export default {
   formatAlerts,
   createAlert
 };

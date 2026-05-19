@@ -1,13 +1,13 @@
-const express = require('express');
-const cors = require('cors');
+import express, { json } from 'express';
+import cors from 'cors';
 
-const alertsRoutes = require('./routes/alerts.routes');
+import alertsRoutes from './routes/alerts.routes.js';
 
 const app = express();
 
 app.use(cors());
-app.use(express.json());
+app.use(json());
 
 app.use('/alerts', alertsRoutes);
 
-module.exports = app;
+export default app;

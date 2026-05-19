@@ -1,12 +1,17 @@
 import prisma from "../config/prisma.js";
 
-export async function getBloods() { 
+async function getBloods() { 
   return prisma.bloodType.findMany({ }); }
 
-export async function getBloodById(id) {
+async function getBloodById(id) {
   return prisma.bloodType.findUnique({
     where: {
       id: Number(id)
     }
   });
+}
+
+export default {
+  getBloods,
+  getBloodById
 }
