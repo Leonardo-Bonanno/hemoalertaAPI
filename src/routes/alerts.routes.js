@@ -48,6 +48,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const newAlert = await alertsService.createAlert(req.body);
+    //post sendMessage
+    //talvez fazer validação se o alerta foi enviado e usar a coluna status pra dizer se o alerta foi enviado ou teve erro
 
     res.status(201).json({
       message: 'Alerta criado com sucesso',
