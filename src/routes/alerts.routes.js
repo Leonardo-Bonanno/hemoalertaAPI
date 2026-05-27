@@ -5,6 +5,9 @@ const router = Router();
 import alertsService from '../services/alerts.service.js';
 import localsService from '../services/locals.service.js';
 import bloodsService from '../services/bloods.service.js';
+import geoService from '../services/geo.service.js';
+
+
 
 // GET LOCALS
 router.get('/locals', async (req, res) => {
@@ -48,8 +51,16 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const newAlert = await alertsService.createAlert(req.body);
-    //post sendMessage
-    //talvez fazer validação se o alerta foi enviado e usar a coluna status pra dizer se o alerta foi enviado ou teve erro
+
+    const hemocentro = await localsService.getLocalById(newAlert.hemocentro.id);
+
+    const alertReceivers = await geoService.findNearbyUsers(
+      hemocentro.latitude,
+      hemocentro.longitude,
+      8
+    );  
+
+    //sendMessage enviando alertReciever
 
     res.status(201).json({
       message: 'Alerta criado com sucesso',
