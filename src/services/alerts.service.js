@@ -1,8 +1,8 @@
 import alertsRepository from "../repositories/alerts.repository.js";
 import localsService from "./locals.service.js";
 import bloodsService from "./bloods.service.js";
+import whatsappService from "./whatsapp/sendMessage.js";
 
-// Função para mapear os alertas, monta objeto para passar para o front
 async function formatAlerts() {
   const alerts = await alertsRepository.getAlerts();
   const locals = await localsService.maplocals();
@@ -32,7 +32,21 @@ async function createAlert({ hemocentro, sanguineo }) {
 
 }
 
+async function sendAlert(alertReceivers, hemocentro, bloodType, endereco, horario) {
+
+  for (const receiver of alertReceivers) {
+    await whatsappService.sendWhatsAppMessage(
+      receiver.number,
+      hemocentro,
+      bloodType,
+      endereco,
+      horario
+    );
+  }
+}
+
 export default {
   formatAlerts,
-  createAlert
+  createAlert,
+  sendAlert
 };

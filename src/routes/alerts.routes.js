@@ -6,8 +6,7 @@ import alertsService from '../services/alerts.service.js';
 import localsService from '../services/locals.service.js';
 import bloodsService from '../services/bloods.service.js';
 import geoService from '../services/geo.service.js';
-
-
+//import whatsappService from '../services/whatsapp/sendMessage.js';
 
 // GET LOCALS
 router.get('/locals', async (req, res) => {
@@ -57,10 +56,10 @@ router.post('/', async (req, res) => {
     const alertReceivers = await geoService.findNearbyUsers(
       hemocentro.latitude,
       hemocentro.longitude,
-      8
+      5
     );  
 
-    //sendMessage enviando alertReciever
+    alertsService.sendAlert(alertReceivers, hemocentro.nome, newAlert.bloodType.blood_type, hemocentro.endereco, hemocentro.horario_funcionamento);
 
     res.status(201).json({
       message: 'Alerta criado com sucesso',
