@@ -50,7 +50,6 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const newAlert = await alertsService.createAlert(req.body);
-
     const hemocentro = await localsService.getLocalById(newAlert.hemocentro.id);
 
     const alertReceivers = await geoService.findNearbyUsers(
@@ -58,8 +57,9 @@ router.post('/', async (req, res) => {
       hemocentro.longitude,
       5
     );  
-
+    
     alertsService.sendAlert(alertReceivers, hemocentro.nome, newAlert.bloodType.blood_type, hemocentro.endereco, hemocentro.horario_funcionamento);
+    
 
     res.status(201).json({
       message: 'Alerta criado com sucesso',
