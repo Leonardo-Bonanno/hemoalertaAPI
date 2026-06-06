@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "prisma generate && prisma migrate deploy",
+    "start": "node server.js",
     "dev": "node server.js"
   },
   "type": "module",
