@@ -4,8 +4,11 @@
   "main": "index.js",
   "scripts": {
     "build": "prisma generate && prisma migrate deploy",
-    "start": "node server.js",
+    "start": "node db seed && node server.js",
     "dev": "node server.js"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "type": "module",
   "keywords": [],
