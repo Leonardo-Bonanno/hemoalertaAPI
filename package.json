@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "prisma generate && prisma migrate deploy",
-    "start": "node db seed && node server.js",
+    "start": "npx prisma db seed && node server.js",
     "dev": "node server.js"
   },
   "prisma": {
