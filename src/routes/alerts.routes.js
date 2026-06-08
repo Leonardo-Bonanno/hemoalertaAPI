@@ -34,15 +34,17 @@ router.get('/bloods', async (req, res) => {
 
 // GET ALERTS
 router.get('/', async (req, res) => {
+  console.log('Rota GET /alerts chamada');
   try {
-
     const alerts = await alertsService.formatAlerts();
     res.status(200).json(alerts);
 
   } catch (error) {
-
-    res.status(500).json({ message: 'Erro ao buscar alertas' });
-    
+    console.error('Erro ao buscar alertas:', error);
+    res.status(500).json({
+      message: 'Erro ao buscar alertas',
+      error: error.message
+    });
   }
 });
 
