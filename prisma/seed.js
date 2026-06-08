@@ -1,4 +1,4 @@
-import prisma from '../prisma.js';
+import prisma from '../src/config/prisma.js';
 
 async function main() {
   console.log('Inserindo tipos sanguíneos...');
